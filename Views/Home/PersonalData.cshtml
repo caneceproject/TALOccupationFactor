@@ -1,0 +1,22 @@
+﻿@model TALOccupationFactor.Models.PersonalDataModel
+@{
+    ViewBag.Title = "Personal Data";
+}
+
+<h4>Personal Data</h4>
+
+@using (Html.BeginForm("PersonalData", "Home", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(p => p.Name, new { @class = "control-label" })
+        @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Name, null, new { @class = "small text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.DOB, new { @class = "control-label" })
+        @Html.TextBoxFor(p => p.DOB, "{0:dd/MM/YYYY}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.DOB, null, new { @class = "small text-danger" })
+    </div>
+    <p><input type="submit" value="Next" class="btn btn-primary" /></p>
+}
