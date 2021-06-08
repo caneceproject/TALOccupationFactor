@@ -10,6 +10,13 @@ namespace TALOccupationFactor.Controllers
 {
     public class HomeController : Controller
     {
+        private IOccupationRepository _occupationRepo;
+
+        public HomeController(IOccupationRepository occupationRepo)
+        {
+            _occupationRepo = occupationRepo;
+        }
+
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
@@ -72,12 +79,10 @@ namespace TALOccupationFactor.Controllers
                 {
                     if (person.Age > 0)
                     {
-                        OccupationRepository occupationRepo = new OccupationRepository();
-
-                        var occupationRatingDict = occupationRepo.GetOccupationRatings();
+                        var occupationRatingDict = _occupationRepo.GetOccupationRatings();
                         if (occupationRatingDict.TryGetValue(person.Occupation, out string rating))
                         {
-                            var ratingFactorDict = occupationRepo.GetRatingFactors();
+                            var ratingFactorDict = _occupationRepo.GetRatingFactors();
                             if (ratingFactorDict.TryGetValue(rating, out double factor))
                             {
                                 //Formula: (SumInsured * OccupationRating) / (12 * 100 * Age)
@@ -105,8 +110,7 @@ namespace TALOccupationFactor.Controllers
         /// <returns>Select list item with a list of occupations</returns>  
         private IEnumerable<SelectListItem> GetOccupationList()
         {
-            OccupationRepository occupationRepo = new OccupationRepository();
-            var occupationRatingDict = occupationRepo.GetOccupationRatings();
+            var occupationRatingDict = _occupationRepo.GetOccupationRatings();
 
             List<SelectListItem> occupationList = new List<SelectListItem>();
             occupationList.Add(new SelectListItem { Text = "", Value = null });
@@ -125,13 +129,12 @@ namespace TALOccupationFactor.Controllers
         /// <returns>Select list item with a list of states</returns>  
         private IEnumerable<SelectListItem> GetStateList()
         {
-            //Temporary list, hardcoded for now
+            //Temporary list, hardcoded for now, can be modified to use repository later
             List<SelectListItem> stateList = new List<SelectListItem>()
             {
                 new SelectListItem { Text = "", Value = null },
                 new SelectListItem { Text = "State 1", Value = "State 1" },
                 new SelectListItem { Text = "State 2", Value = "State 2" }
-
             };
 
             return stateList;

@@ -9,7 +9,7 @@ namespace TALOccupationFactor.Data
     ///  This class handles data access for Occupation rating and factor
     ///  Can be used to access persistent data stored in database
     /// </summary>
-    public class OccupationRepository
+    public class OccupationRepository: IOccupationRepository
     {
         /// <summary>  
         /// Return a list of occupations and their rating
