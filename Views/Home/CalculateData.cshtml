@@ -31,13 +31,13 @@
 
     <div class="form-group">
         @Html.LabelFor(p => p.SumInsured, new { @class = "control-label" })
-        @Html.TextBoxFor(p => p.SumInsured, new { @class = "form-control" })
+        @Html.TextBoxFor(p => p.SumInsured, "{0:0.00}", new { @class = "form-control", @maxlength = "10" })
         @Html.ValidationMessageFor(p => p.SumInsured, null, new { @class = "small text-danger" })
     </div>
 
     <div class="form-group">
         @Html.LabelFor(p => p.MonthlyExpenses, new { @class = "control-label" })
-        @Html.TextBoxFor(p => p.MonthlyExpenses, new { @class = "form-control" })
+        @Html.TextBoxFor(p => p.MonthlyExpenses, "{0:0.00}", new { @class = "form-control", @maxlength = "10" })
         @Html.ValidationMessageFor(p => p.MonthlyExpenses, null, new { @class = "small text-danger" })
     </div>
 
@@ -54,8 +54,16 @@
         @Html.ValidationMessageFor(p => p.Postcode, null, new { @class = "small text-danger" })
     </div>
 
+    <div class="form-inline">
+        <input type="submit" name="submitButton" value="Back" class="btn btn-default" />
+        <input type="submit" name="submitButton" value="Calculate" class="btn btn-primary" />
 
-    <input type="submit" name="submitButton" value="Back" class="btn btn-default" />
-    <input type="submit" name="submitButton" value="Calculate" class="btn btn-primary" />
+        @if (Model.Total > 0)
+        {
+            <span>Total value: </span>
+            <b>@Html.DisplayFor(p => p.Total, new { @class = "control-label" })</b>
+        }
+
+    </div>
 }
 

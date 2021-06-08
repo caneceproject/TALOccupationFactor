@@ -48,7 +48,7 @@ namespace TALOccupationFactor.ViewModels
         public IEnumerable<SelectListItem> StateList { get; set; }
 
         [Required(ErrorMessage = "Please enter your postcode")]
-        [RegularExpression(@"^(\d{4})$", ErrorMessage = "Please enter a valid postcode")]
+        [RegularExpression(@"^(\d{4})$", ErrorMessage = "Please enter a valid postcode (4 digit number")]
         public string Postcode { get; set; }
 
         [Display(Name = "Total")]
