@@ -25,7 +25,7 @@ namespace TALOccupationFactor.Data
                 { "Author", "White Collar" },
                 { "Farmer", "Heavy Manual" },
                 { "Mechanic", "Heavy Manual" },
-                { "Florist", "Light Manual" },
+                { "Florist", "Light Manual" }
             };
 
             return occupationRatingDict;

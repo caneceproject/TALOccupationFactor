@@ -17,13 +17,6 @@ namespace TALOccupationFactor.Controllers
             _occupationRepo = occupationRepo;
         }
 
-        public ActionResult Index()
-        {
-            ViewBag.Title = "Home Page";
-
-            return View();
-        }
-
         [HttpGet]
         public ActionResult PersonalData()
         {
@@ -63,8 +56,8 @@ namespace TALOccupationFactor.Controllers
         [HttpPost]
         public ActionResult CalculateData(CalculateDataViewModel person, string submitButton)
         {
-            //User clicks 'Back' button
-            if (!String.IsNullOrEmpty(submitButton) && submitButton.Equals("Back"))
+            //User clicks 'Previous' button
+            if (!String.IsNullOrEmpty(submitButton) && submitButton.Equals("Previous"))
             {
                 PersonalDataViewModel personalDataVM = new PersonalDataViewModel(person);
                 return View("PersonalData", personalDataVM);
@@ -85,7 +78,7 @@ namespace TALOccupationFactor.Controllers
                             var ratingFactorDict = _occupationRepo.GetRatingFactors();
                             if (ratingFactorDict.TryGetValue(rating, out double factor))
                             {
-                                //Formula: (SumInsured * OccupationRating) / (12 * 100 * Age)
+                                //Formula: (Sum Insured * Occupation Rating Factor) / (100 * 12 * Age)
                                 total = person.SumInsured * (decimal)factor / (1200 * person.Age);
                             }
                         }
